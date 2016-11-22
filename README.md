@@ -5,11 +5,11 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
 # Prerequisites
 
 - The plug-in has been tested to run on Bamboo server version 5.13.2 or later.
+- To build the plug-in, you will need to install the [Atlassian pluign SDK](https://developer.atlassian.com/docs/getting-started).
 - You will need to setup the Static Analyzer Client Utility on your Bamboo server (to initiate scans on local agents), or on remote agent machines. For more information on obtaining the client utility, see the docs [here](http://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/src_scanning.html).
 
 # Building the Plug-in
 
-- To build the plug-in, you will need to install the [Atlassian pluign SDK](https://developer.atlassian.com/docs/getting-started).
 - Navigate to the plug-in's root folder and issue the `atlas-package` command. The built plug-in JAR will be in the target folder.
 
 # Installation and Configuration
