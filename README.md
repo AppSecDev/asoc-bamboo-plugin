@@ -6,7 +6,7 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
 
 - An account on the [IBM Application Security on Cloud](https://appscan.ibmcloud.com) service. You'll also need to [create an application](http://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/ent_create_application.html) on the service and copy down its numeric ID in the browser URL. This ID will be required later on when configuring the SAST scan task.
 - The plug-in has been tested to run on Bamboo server version 5.13.2 or later.
-- To build the plug-in, you will need to install the [Atlassian pluign SDK](https://developer.atlassian.com/docs/getting-started).
+- To build the plug-in, you will need to install the [Atlassian plug-in SDK](https://developer.atlassian.com/docs/getting-started).
 - You will need to setup the Static Analyzer Client Utility on your Bamboo server (to initiate scans on local agents), or on remote agent machines. For more information on obtaining the client utility, see the docs [here](http://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/src_scanning.html).
 
 # Building the Plug-in
@@ -44,6 +44,14 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
    - Optionally, specify the criteria for whether or not to fail the build when security findings are found
 
 # Scan Results after a Build
+
+1. The SAST scan task publishes two artifacts:
+
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result1.png)
+
+   - IRX - this is the intermediate representation of your artifacts that is uploaded to the cloud service for scanning.
+   
+   - Scan Results - HTML report of the security findings that are found.
 
 # License
 
