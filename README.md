@@ -18,9 +18,9 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
 
    ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/Snap1.png)
 
-2. Via Bamboo's administration dashboard, add the SA Client capability to your server (for local agents), or to you remote agents. Specify the path to the Static Analyzer Client Utility.
+2. Via Bamboo's administration dashboard, add the SA Client capability to your server (for local agents), or to your remote agents. Specify the path to the Static Analyzer Client Utility.
 
-   
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/Snap2.png)
 
 # License
 
