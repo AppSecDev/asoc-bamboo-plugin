@@ -53,6 +53,10 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
    
    - Scan Results - HTML report of the security findings that are found.
 
+2. Messages about the outcome of the scan will also be emitted to the build log:
+
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result2.png)
+
 # License
 
 All files found in this project are licensed under the [Apache License 2.0](LICENSE).
