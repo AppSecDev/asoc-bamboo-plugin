@@ -14,9 +14,13 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
 
 # Installation and Configuration
 
-1. Install the plug-in via the Bamboo's administration dashboard. After installing the plug-in, it will appear in the list of user installed add-ons:
+1. Install the plug-in via the Bamboo's administration dashboard. After installing the plug-in, it will appear in the list of user installed add-ons.
 
    ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/Snap1.png)
+
+2. Via Bamboo's administration dashboard, add the SA Client capability to your server (for local agents), or to you remote agents. Specify the path to the Static Analyzer Client Utility.
+
+   
 
 # License
 
