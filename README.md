@@ -13,7 +13,7 @@ The plug-in has been tested to run on Bamboo server version 5.13.2 or later.
 
 1. Install the plug-in via the Bamboo's administration dashboard.
 
-   ![](images/snap1.png)
+   ![](asoc-bamboo-plugin/images/Snap1.png)
 
 2. TODO
 3. TODO 3
