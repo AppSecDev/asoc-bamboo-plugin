@@ -36,8 +36,11 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
    ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task2.png)
 
    - Select the client utility to use from the dropdown
+   
    - Select the credentials to use to login to the cloud service
+   
    - Enter the ID of the application you want to associate your scan with
+   
    - Optionally, specify the criteria for whether or not to fail the build when security findings are found
 
 # License
