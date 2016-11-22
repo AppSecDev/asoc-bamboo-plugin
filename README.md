@@ -7,16 +7,17 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
 - To build the plug-in, you will need to install the [Atlassian pluign SDK](https://developer.atlassian.com/docs/getting-started).
 - Navigate to the plug-in's root folder and issue the `atlas-package` command. The built plug-in JAR will be in the target folder.
 
-# Installation and Configuration
+# Installation
 
-The plug-in has been tested to run on Bamboo server version 5.13.2 or later.
+- The plug-in has been tested to run on Bamboo server version 5.13.2 or later.
+- Install the plug-in via the Bamboo's administration dashboard.
+- After installation the plug-in will appear in the list of user installed add-ons:
 
-1. Install the plug-in via the Bamboo's administration dashboard.
+ ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/Snap1.png)
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/Snap1.png)
+# Configuration
 
-2. TODO
-3. TODO 3
+
 
 # License
 
