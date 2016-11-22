@@ -27,7 +27,13 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
 
 # Adding the SAST Scan Task to your Build Plan
 
-1. Add the SAST scan task to your build plan after your artifacts have been built.
+1. Add the SAST scan task to your build plan after your artifacts have been built. The SAST scan task will generate an intermediate representation of your artifacts and submit it to the cloud service for scanning.
+
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task1.png)
+
+2. Configure the SAST scan task:
+
+   - TODO
 
 # License
 
