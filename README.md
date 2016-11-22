@@ -43,7 +43,8 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
    
    - Optionally, specify the criteria for whether or not to fail the build when security findings are found
 
+# Scan Results after a Build
+
 # License
 
 All files found in this project are licensed under the [Apache License 2.0](LICENSE).
-
