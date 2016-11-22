@@ -39,7 +39,7 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
    
    - Select the credentials to use to login to the cloud service
    
-   - Enter the ID of the application you want to associate your scan with
+   - Enter the ID of the application to associate your scan with
    
    - Optionally, specify the criteria for whether or not to fail the build when security findings are found
 
