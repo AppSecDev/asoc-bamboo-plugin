@@ -17,17 +17,17 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
 
 1. Install the plug-in via the Bamboo's administration dashboard. After installing the plug-in, it will appear in the list of user installed add-ons.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/Snap1.png)
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install1.png)
 
 2. Via Bamboo's administration dashboard, add the SA Client capability to your server (for local agents), or to your remote agents. Specify the path to the Static Analyzer Client Utility.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/Snap2.png)
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install2.png)
 
 3. Enter your IBM Application Security on Cloud account username and password in Bamboo's shared credentials page.
 
 # Adding the SAST Scan Task to your Build Plan
 
-
+1. Add the SAST scan task to your build plan after your artifacts have been built.
 
 # License
 
