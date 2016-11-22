@@ -4,7 +4,7 @@ Easily integrate security scanning with the [IBM Application Security on Cloud](
 
 # Prerequisites
 
-- An account on the [IBM Application Security on Cloud](https://appscan.ibmcloud.com) service. You'll also need to create an application on the service and note its numeric ID in the browser URL. The ID will be required when configuring the SAST scan task later on.
+- An account on the [IBM Application Security on Cloud](https://appscan.ibmcloud.com) service. You'll also need to create an application on the service and copy down its numeric ID in the browser URL. This ID will be required later on when configuring the SAST scan task.
 - The plug-in has been tested to run on Bamboo server version 5.13.2 or later.
 - To build the plug-in, you will need to install the [Atlassian pluign SDK](https://developer.atlassian.com/docs/getting-started).
 - You will need to setup the Static Analyzer Client Utility on your Bamboo server (to initiate scans on local agents), or on remote agent machines. For more information on obtaining the client utility, see the docs [here](http://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/src_scanning.html).
