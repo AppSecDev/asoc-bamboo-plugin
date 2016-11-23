@@ -31,7 +31,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 public class SASTScanTaskConfigurator extends AbstractTaskConfigurator implements TaskRequirementSupport, ISASTConstants {
 	
 	private static final String UTIL_LIST = "utilList";	//$NON-NLS-1$
-	private static final String CRED_LIST = "credList"; //$NON-NLS-1$
+	private static final String CRED_LIST = "credList";	//$NON-NLS-1$
 	
 	private UIConfigSupport uiConfigSupport;
 	private Map<Long, String> credentials;
@@ -78,7 +78,7 @@ public class SASTScanTaskConfigurator extends AbstractTaskConfigurator implement
 	
 	private void validateNumber(ActionParametersMap params, ErrorCollection errorCollection, String field) {
 		String value = params.getString(field);
-		if (!("".equals(value) || StringUtils.isNumeric(value)))			//$NON-NLS-1$
+		if (!("".equals(value) || StringUtils.isNumeric(value)))		//$NON-NLS-1$
 			errorCollection.addError(field, i18nBean.getText("err.nan"));	//$NON-NLS-1$
 	}
 	
