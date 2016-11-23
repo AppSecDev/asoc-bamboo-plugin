@@ -37,7 +37,7 @@ Easily integrate [IBM Application Security on Cloud](https://appscan.ibmcloud.co
 
    - Select the client utility to use.
    
-   - Select the type of credentials to use when logging in to the cloud service.
+   - Select the shared credentials to use when logging in to the cloud service.
    
    - Enter the ID of the application to associate with your scan.
    
