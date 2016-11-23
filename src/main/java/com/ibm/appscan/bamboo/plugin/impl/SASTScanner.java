@@ -28,8 +28,8 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 	
 	private static final String APPSCAN_OPTS	= "APPSCAN_OPTS";	//$NON-NLS-1$
 	private static final String RESPONSE_JSON	= "response.json";	//$NON-NLS-1$
-	private static final String STATUS_FAILED	= "Failed";			//$NON-NLS-1$
-	private static final String STATUS_READY	= "Ready";			//$NON-NLS-1$
+	private static final String STATUS_FAILED	= "Failed";		//$NON-NLS-1$
+	private static final String STATUS_READY	= "Ready";		//$NON-NLS-1$
 	
 	private LogHelper logger;
 	private ProcessService processService;
@@ -88,7 +88,7 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext, 
-						"prepare", 				//$NON-NLS-1$
+						"prepare", 		//$NON-NLS-1$
 						"-n", irxBaseName));	//$NON-NLS-1$
 		
 		publisher.publishArtifact(taskContext, "IRX", workingDir, irxBaseName + "*.*"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -108,7 +108,7 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"scx_login",  					//$NON-NLS-1$
+						"scx_login",  			//$NON-NLS-1$
 						"-u", envVar(ASOC_USERNAME),	//$NON-NLS-1$
 						"-P", envVar(ASOC_PASSWORD)));	//$NON-NLS-1$
 	}
@@ -125,8 +125,8 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"queue_analysis",  				//$NON-NLS-1$
-						"-a", appId,					//$NON-NLS-1$
+						"queue_analysis",  		//$NON-NLS-1$
+						"-a", appId,			//$NON-NLS-1$
 						"-n", irxBaseName + ".irx"));	//$NON-NLS-1$ //$NON-NLS-2$
 		
 		int exitCode = process.getHandler().getExitCode();
@@ -143,9 +143,9 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"info",  				//$NON-NLS-1$
-						"-i", jobId,			//$NON-NLS-1$
-						"-json", 				//$NON-NLS-1$
+						"info",  		//$NON-NLS-1$
+						"-i", jobId,		//$NON-NLS-1$
+						"-json", 		//$NON-NLS-1$
 						">", RESPONSE_JSON));	//$NON-NLS-1$
 		
 		return process.getHandler().getExitCode();
