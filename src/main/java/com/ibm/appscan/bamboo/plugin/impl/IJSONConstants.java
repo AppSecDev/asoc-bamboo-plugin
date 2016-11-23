@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonPointer;
 
 public interface IJSONConstants {
 	
-	JsonPointer STATUS	= JsonPointer.compile("/LatestExecution/Status");			//$NON-NLS-1$
+	JsonPointer STATUS	= JsonPointer.compile("/LatestExecution/Status");		//$NON-NLS-1$
 	JsonPointer HIGH	= JsonPointer.compile("/LatestExecution/NHighIssues");		//$NON-NLS-1$
 	JsonPointer MEDIUM	= JsonPointer.compile("/LatestExecution/NMediumIssues");	//$NON-NLS-1$
 	JsonPointer LOW		= JsonPointer.compile("/LatestExecution/NLowIssues");		//$NON-NLS-1$
