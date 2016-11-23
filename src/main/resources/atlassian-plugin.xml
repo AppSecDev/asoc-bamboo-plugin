@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+(c) Copyright IBM Corporation 2016.
+LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
+-->
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="com.ibm.appscan.bamboo.plugin.i18n"/>
+    
+    <!-- add our web resources -->
+    <!-- web-resource key="com.ibm.appscan.bamboo.plugin-resources" name="com.ibm.appscan.bamboo.plugin Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="com.ibm.appscan.bamboo.plugin.css" location="/css/com.ibm.appscan.bamboo.plugin.css"/>
+        <resource type="download" name="com.ibm.appscan.bamboo.plugin.js" location="/js/com.ibm.appscan.bamboo.plugin.js"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>com.ibm.appscan.bamboo.plugin</context>
+    </web-resource -->
+    
+  	<taskType key="sastScanTask" name="SAST Scan Task" class="com.ibm.appscan.bamboo.plugin.impl.SASTScanTask">
+  		<description>Task to run a SAST scan</description>
+  		<category name="test"/>
+  		<executable key="saclientutil" nameKey="saclientutil.name" pathHelpKey="saclientutil.help"/>
+  		<configuration class="com.ibm.appscan.bamboo.plugin.impl.SASTScanTaskConfigurator"/>
+  		<resource type="freemarker" name="edit" location="templates/editSASTScanTask.ftl"/>
+  		<resource type="freemarker" name="view" location="templates/viewSASTScanTask.ftl"/>
+	</taskType>
+    
+</atlassian-plugin>
