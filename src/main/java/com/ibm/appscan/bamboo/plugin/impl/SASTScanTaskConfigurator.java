@@ -34,7 +34,7 @@ public class SASTScanTaskConfigurator extends AbstractTaskConfigurator implement
 	private static final String CRED_LIST = "credList";	//$NON-NLS-1$
 	
 	private UIConfigSupport uiConfigSupport;
-	private Map<Long, String> credentials;
+	private CredentialsManager credentialsManager;
 	private I18nBean i18nBean;
 	
 	public SASTScanTaskConfigurator(
@@ -43,24 +43,27 @@ public class SASTScanTaskConfigurator extends AbstractTaskConfigurator implement
 			@ComponentImport I18nBeanFactory i18nBeanFactory) {
 		
 		this.uiConfigSupport = uiConfigSupport;
-		
-		credentials = new Hashtable<Long, String>();
+		this.credentialsManager = credentialsManager;
+		this.i18nBean = i18nBeanFactory.getI18nBean();
+	}
+	
+	private Map<Long, String> getCredentials() {
+		Map<Long, String> credentials = new Hashtable<Long, String>();
 		for (CredentialsData data : credentialsManager.getAllCredentials())
 			credentials.put(data.getId(), data.getName());
-		
-		this.i18nBean = i18nBeanFactory.getI18nBean();
+		return credentials;
 	}
 	
 	@Override
 	public void populateContextForCreate(Map<String, Object> context) {
 		context.put(UTIL_LIST, uiConfigSupport.getExecutableLabels(SA_CLIENT_UTIL_KEY));
-		context.put(CRED_LIST, credentials);
+		context.put(CRED_LIST, getCredentials());
 	}
 	
 	@Override
 	public void populateContextForEdit(Map<String, Object> context, TaskDefinition taskDefinition) {
 		context.put(UTIL_LIST, uiConfigSupport.getExecutableLabels(SA_CLIENT_UTIL_KEY));
-		context.put(CRED_LIST, credentials);
+		context.put(CRED_LIST, getCredentials());
 		Map<String, String> config = taskDefinition.getConfiguration();
 		context.put(CFG_SELECTED_UTIL, config.get(CFG_SELECTED_UTIL));
 		context.put(CFG_SELECTED_CRED, config.get(CFG_SELECTED_CRED));
