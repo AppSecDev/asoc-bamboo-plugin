@@ -26,10 +26,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SASTScanner implements ISASTConstants, IJSONConstants {
 	
-	private static final String APPSCAN_OPTS	= "APPSCAN_OPTS";	//$NON-NLS-1$
-	private static final String RESPONSE_JSON	= "response.json";	//$NON-NLS-1$
-	private static final String STATUS_FAILED	= "Failed";		//$NON-NLS-1$
-	private static final String STATUS_READY	= "Ready";		//$NON-NLS-1$
+	private static final String APPSCAN_OPTS		= "APPSCAN_OPTS";		//$NON-NLS-1$
+	private static final String APPSCAN_INTERVAL	= "APPSCAN_INTERVAL";	//$NON-NLS-1$
+	
+	private static final String RESPONSE_JSON		= "response.json";		//$NON-NLS-1$
+	private static final String STATUS_FAILED		= "Failed";				//$NON-NLS-1$
+	private static final String STATUS_READY		= "Ready";				//$NON-NLS-1$
+	
+	private static final int MIN_TIME_TO_SLEEP		= 30;
+	private static final int TIME_TO_SLEEP			= 120;
 	
 	private LogHelper logger;
 	private ProcessService processService;
@@ -60,15 +65,20 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 			this.utilPath = utilPath + "/bin/appscan.sh";		//$NON-NLS-1$
 	}
 	
+	private String getVariableValue(TaskContext taskContext, String name) {
+		VariableContext variables = taskContext.getBuildContext().getVariableContext();
+		VariableDefinitionContext variable = variables.getEffectiveVariables().get(name);
+		return variable == null ? null : variable.getValue();
+	}
+	
 	private ExternalProcessBuilder createExternalProcessBuilder(TaskContext taskContext, String... commands) {
 		
 		ExternalProcessBuilder builder = new ExternalProcessBuilder();
 		builder.workingDirectory(workingDir);
 		
-		VariableContext variables = taskContext.getBuildContext().getVariableContext();
-		VariableDefinitionContext variable = variables.getEffectiveVariables().get(APPSCAN_OPTS);
-		if (variable != null)
-			builder.env(APPSCAN_OPTS, variable.getValue());
+		String appscanOpts = getVariableValue(taskContext, APPSCAN_OPTS);
+		if (appscanOpts != null)
+			builder.env(APPSCAN_OPTS, appscanOpts);
 		
 		List<String> list = new ArrayList<String>();
 		list.add(utilPath);
@@ -108,7 +118,7 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"scx_login",  			//$NON-NLS-1$
+						"scx_login",					//$NON-NLS-1$
 						"-u", envVar(ASOC_USERNAME),	//$NON-NLS-1$
 						"-P", envVar(ASOC_PASSWORD)));	//$NON-NLS-1$
 	}
@@ -125,8 +135,8 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"queue_analysis",  		//$NON-NLS-1$
-						"-a", appId,			//$NON-NLS-1$
+						"queue_analysis",  				//$NON-NLS-1$
+						"-a", appId,					//$NON-NLS-1$
 						"-n", irxBaseName + ".irx"));	//$NON-NLS-1$ //$NON-NLS-2$
 		
 		int exitCode = process.getHandler().getExitCode();
@@ -137,21 +147,36 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 		jobId = logs.get(0).getUnstyledLog();
 	}
 	
+	private int getTimeToSleep(TaskContext taskContext) {
+		
+		String value = getVariableValue(taskContext, APPSCAN_INTERVAL);
+		if (value != null) {
+			try {
+				return Math.max(Integer.parseInt(value), MIN_TIME_TO_SLEEP);
+			}
+			catch (NumberFormatException e) {
+				// fall through
+			}
+		}
+		
+		return TIME_TO_SLEEP;
+	}
+	
 	private int pollForStatus(TaskContext taskContext) {
 		
 		ExternalProcess process = processService.executeExternalProcess(
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"info",  		//$NON-NLS-1$
-						"-i", jobId,		//$NON-NLS-1$
-						"-json", 		//$NON-NLS-1$
+						"info",					//$NON-NLS-1$
+						"-i", jobId,			//$NON-NLS-1$
+						"-json",				//$NON-NLS-1$
 						">", RESPONSE_JSON));	//$NON-NLS-1$
 		
 		return process.getHandler().getExitCode();
 	}
 	
-	public boolean isReady(TaskContext taskContext) throws TaskException {
+	private boolean isReady(TaskContext taskContext) throws TaskException {
 		
 		logger.info("status.check"); //$NON-NLS-1$
 		
@@ -189,6 +214,13 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 		catch (IOException e) {
 			throw new TaskException(e.getLocalizedMessage(), e);
 		}
+	}
+	
+	public void waitForReady(TaskContext taskContext) throws TaskException, InterruptedException {
+		do {
+			Thread.sleep(getTimeToSleep(taskContext) * 1000L);
+		}
+		while (!isReady(taskContext));
 	}
 	
 	public void downloadResult(TaskContext taskContext, IArtifactPublisher publisher) throws TaskException {

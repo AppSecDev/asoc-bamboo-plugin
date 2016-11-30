@@ -36,8 +36,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 @Scanned
 public class SASTScanTask implements TaskType, ISASTConstants, IArtifactPublisher {
 	
-	private static final String SA_DIR 	= ".sa";		//$NON-NLS-1$
-	private static final long TIME_TO_SLEEP	= 5 * 60 * 1000;	// 5 minutes
+	private static final String SA_DIR 	= ".sa"; //$NON-NLS-1$
 	
 	private LogHelper logger;
 	private SASTScanner scanner;
@@ -185,11 +184,7 @@ public class SASTScanTask implements TaskType, ISASTConstants, IArtifactPublishe
 		TaskResultBuilder result = TaskResultBuilder.newBuilder(taskContext);		
 		
 		try {
-			do {
-				Thread.sleep(TIME_TO_SLEEP);
-			}
-			while (!scanner.isReady(taskContext));
-			
+			scanner.waitForReady(taskContext);
 			scanner.downloadResult(taskContext, this);
 			
 			return calculateResult(taskContext, result).build();
