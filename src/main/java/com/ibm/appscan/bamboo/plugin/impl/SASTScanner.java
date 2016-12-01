@@ -148,6 +148,8 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 			throw new TaskException(logger.getText("submit.irx.failed", exitCode)); //$NON-NLS-1$
 		
 		jobId = getLastLogEntry(taskContext);
+		if (!jobId.matches("^[-0-9a-zA-Z]+$"))								//$NON-NLS-1$
+			throw new TaskException(logger.getText("submit.irx.failed2"));	//$NON-NLS-1$
 	}
 	
 	private int getTimeToSleep(TaskContext taskContext) {
