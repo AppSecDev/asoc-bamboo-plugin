@@ -16,7 +16,4 @@ public interface ISASTConstants {
 	String CFG_MAX_HIGH			= "maxHigh";			//$NON-NLS-1$
 	String CFG_MAX_MEDIUM		= "maxMedium";			//$NON-NLS-1$
 	String CFG_MAX_LOW			= "maxLow";				//$NON-NLS-1$
-	
-	String ASOC_USERNAME		= "asoc_username";		//$NON-NLS-1$
-	String ASOC_PASSWORD		= "asoc_password";		//$NON-NLS-1$
 }

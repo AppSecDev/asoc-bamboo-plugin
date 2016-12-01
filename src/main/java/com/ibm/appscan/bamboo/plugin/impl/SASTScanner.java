@@ -39,6 +39,9 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 	private LogHelper logger;
 	private ProcessService processService;
 	
+	private String username;
+	private String password;
+	
 	private File workingDir;
 	private String utilPath;
 	
@@ -52,6 +55,14 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 	public SASTScanner(LogHelper logger, ProcessService processService) {
 		this.logger = logger;
 		this.processService = processService;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public void setWorkingDir(File workingDir) {
@@ -124,19 +135,14 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 		return text;
 	}
 	
-	private String envVar(String value) {
-		return SystemUtils.IS_OS_WINDOWS ? 
-				"%bamboo_" + value + "%" : "$bamboo_" + value; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	}
-	
 	private void loginToASoC(TaskContext taskContext) {
 		processService.executeExternalProcess(
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"scx_login",					//$NON-NLS-1$
-						"-u", envVar(ASOC_USERNAME),	//$NON-NLS-1$
-						"-P", envVar(ASOC_PASSWORD)));	//$NON-NLS-1$
+						"scx_login",		//$NON-NLS-1$
+						"-u", username,		//$NON-NLS-1$
+						"-P", password));	//$NON-NLS-1$
 	}
 	
 	public void submitIRX(TaskContext taskContext) throws TaskException {

@@ -82,16 +82,19 @@ public class SASTScanTask implements TaskType, ISASTConstants, IArtifactPublishe
 		taskContext.getBuildContext().getArtifactContext().addPublishingResult(result);
 	}
 	
-	private void setUsernameAndPasswordVars(TaskContext taskContext) {
+	private void setUsernameAndPassword(TaskContext taskContext) {
 		
 		String id = taskContext.getConfigurationMap().get(CFG_SELECTED_CRED);
 		CredentialsData credentials = credentialsManager.getCredentials(Long.parseLong(id));
 		
 		String username = credentials.getConfiguration().get("username"); //$NON-NLS-1$
-		taskContext.getBuildContext().getVariableContext().addLocalVariable(ASOC_USERNAME, username);
+		scanner.setUsername(username);
 		
-		String password = credentials.getConfiguration().get("password"); //$NON-NLS-1$
-		taskContext.getBuildContext().getVariableContext().addLocalVariable(ASOC_PASSWORD, encryptionService.decrypt(password));
+		String password = encryptionService.decrypt(credentials.getConfiguration().get("password")); //$NON-NLS-1$
+		scanner.setPassword(password);
+		
+		// this ensures password is masked in build log
+		taskContext.getBuildContext().getVariableContext().addLocalVariable("asoc_password", password); //$NON-NLS-1$
 	}
 	
 	private File copyArtifacts(TaskContext taskContext) throws TaskException {
@@ -173,7 +176,7 @@ public class SASTScanTask implements TaskType, ISASTConstants, IArtifactPublishe
 		
 		logger.setLogger(taskContext.getBuildLogger());
 		
-		setUsernameAndPasswordVars(taskContext);
+		setUsernameAndPassword(taskContext);
 		
 		scanner.setWorkingDir(copyArtifacts(taskContext));
 		scanner.setUtilPath(getUtilPath(taskContext));
