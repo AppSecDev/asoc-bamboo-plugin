@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.SystemUtils;
@@ -108,8 +109,19 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 	}
 	
 	private String getLastLogEntry(TaskContext taskContext) {
-		List<LogEntry> logs = taskContext.getBuildLogger().getLastNLogEntries(1);
-		return logs.get(0).getUnstyledLog();
+		
+		List<LogEntry> logs = taskContext.getBuildLogger().getLastNLogEntries(2);
+		Collections.reverse(logs);
+		
+		String text = ""; //$NON-NLS-1$
+		
+		for (LogEntry log : logs) {
+			text = log.getUnstyledLog();
+			if (!text.trim().isEmpty())
+				break;
+		}
+		
+		return text;
 	}
 	
 	private String envVar(String value) {
