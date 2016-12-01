@@ -29,7 +29,6 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 	private static final String APPSCAN_OPTS		= "APPSCAN_OPTS";		//$NON-NLS-1$
 	private static final String APPSCAN_INTERVAL	= "APPSCAN_INTERVAL";	//$NON-NLS-1$
 	
-	private static final String RESPONSE_JSON		= "response.json";		//$NON-NLS-1$
 	private static final String STATUS_FAILED		= "Failed";				//$NON-NLS-1$
 	private static final String STATUS_READY		= "Ready";				//$NON-NLS-1$
 	
@@ -108,6 +107,11 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 			throw new TaskException(logger.getText("generate.irx.failed", exitCode)); //$NON-NLS-1$
 	}
 	
+	private String getLastLogEntry(TaskContext taskContext) {
+		List<LogEntry> logs = taskContext.getBuildLogger().getLastNLogEntries(1);
+		return logs.get(0).getUnstyledLog();
+	}
+	
 	private String envVar(String value) {
 		return SystemUtils.IS_OS_WINDOWS ? 
 				"%bamboo_" + value + "%" : "$bamboo_" + value; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -143,8 +147,7 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 		if (exitCode != 0)
 			throw new TaskException(logger.getText("submit.irx.failed", exitCode)); //$NON-NLS-1$
 		
-		List<LogEntry> logs = taskContext.getBuildLogger().getLastNLogEntries(1);
-		jobId = logs.get(0).getUnstyledLog();
+		jobId = getLastLogEntry(taskContext);
 	}
 	
 	private int getTimeToSleep(TaskContext taskContext) {
@@ -162,58 +165,52 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 		return TIME_TO_SLEEP;
 	}
 	
-	private int pollForStatus(TaskContext taskContext) {
+	private JsonNode pollForStatus(TaskContext taskContext) {
 		
-		ExternalProcess process = processService.executeExternalProcess(
+		processService.executeExternalProcess(
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"info",					//$NON-NLS-1$
-						"-i", jobId,			//$NON-NLS-1$
-						"-json",				//$NON-NLS-1$
-						">", RESPONSE_JSON));	//$NON-NLS-1$
+						"info",			//$NON-NLS-1$
+						"-i", jobId,	//$NON-NLS-1$
+						"-json"));		//$NON-NLS-1$
 		
-		return process.getHandler().getExitCode();
+		try {
+			return new ObjectMapper().readTree(getLastLogEntry(taskContext));
+		}
+		catch (IOException e) {
+			return null;
+		}
 	}
 	
 	private boolean isReady(TaskContext taskContext) throws TaskException {
 		
 		logger.info("status.check"); //$NON-NLS-1$
 		
-		int exitCode = pollForStatus(taskContext);
-		if (exitCode != 0) {
+		JsonNode response = pollForStatus(taskContext);
+		if (response == null) {
 			loginToASoC(taskContext);
-			exitCode = pollForStatus(taskContext);
-			if (exitCode != 0)
-				throw new TaskException(logger.getText("status.check.failed", exitCode)); //$NON-NLS-1$
+			response = pollForStatus(taskContext);
+			if (response == null)
+				throw new TaskException(logger.getText("status.check.failed")); //$NON-NLS-1$
 		}
 		
-		try {
-			JsonNode response = new ObjectMapper().readTree(new File(workingDir, RESPONSE_JSON));
+		String status = response.at(STATUS).asText(STATUS_FAILED);
+		logger.info("status.check.is", status); //$NON-NLS-1$
+		
+		if (!STATUS_FAILED.equals(status)) {
 			
-			if (response != null) {
-				
-				String status = response.at(STATUS).asText(STATUS_FAILED);
-				logger.info("status.check.is", status); //$NON-NLS-1$
-				
-				if (!STATUS_FAILED.equals(status)) {
-					
-					if (!STATUS_READY.equals(status))
-						return false;
-					
-					high = response.at(HIGH).asLong(-1);
-					medium = response.at(MEDIUM).asLong(-1);
-					low = response.at(LOW).asLong(-1);
-					
-					return true;
-				}
-			}
+			if (!STATUS_READY.equals(status))
+				return false;
 			
-			throw new TaskException(logger.getText("scan.failed")); //$NON-NLS-1$
+			high = response.at(HIGH).asLong(-1);
+			medium = response.at(MEDIUM).asLong(-1);
+			low = response.at(LOW).asLong(-1);
+			
+			return true;
 		}
-		catch (IOException e) {
-			throw new TaskException(e.getLocalizedMessage(), e);
-		}
+		
+		throw new TaskException(logger.getText("scan.failed")); //$NON-NLS-1$
 	}
 	
 	public void waitForReady(TaskContext taskContext) throws TaskException, InterruptedException {
