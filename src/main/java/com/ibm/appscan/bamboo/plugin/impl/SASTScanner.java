@@ -35,6 +35,7 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 	
 	private static final int MIN_TIME_TO_SLEEP		= 30;
 	private static final int TIME_TO_SLEEP			= 120;
+	private static final int MAX_CONSEC_FAILS		= 5;
 	
 	private LogHelper logger;
 	private ProcessService processService;
@@ -142,7 +143,8 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 						taskContext,
 						"scx_login",		//$NON-NLS-1$
 						"-u", username,		//$NON-NLS-1$
-						"-P", password));	//$NON-NLS-1$
+						"-P", password, 	//$NON-NLS-1$
+						"-persist"));		//$NON-NLS-1$
 	}
 	
 	public void submitIRX(TaskContext taskContext) throws TaskException {
@@ -212,7 +214,7 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 			loginToASoC(taskContext);
 			response = pollForStatus(taskContext);
 			if (response == null)
-				throw new TaskException(logger.getText("status.check.failed")); //$NON-NLS-1$
+				throw new StatusCheckException(logger.getText("status.check.failed")); //$NON-NLS-1$
 		}
 		
 		String status = response.at(STATUS).asText(STATUS_FAILED);
@@ -234,10 +236,24 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 	}
 	
 	public void waitForReady(TaskContext taskContext) throws TaskException, InterruptedException {
-		do {
+		
+		int consecFails = 0;
+		
+		for (;;) {
+			
 			Thread.sleep(getTimeToSleep(taskContext) * 1000L);
+			
+			try {
+				if (isReady(taskContext))
+					return;
+				
+				consecFails = 0;
+			}
+			catch (StatusCheckException e) {
+				if (++consecFails == MAX_CONSEC_FAILS)
+					throw e;
+			}
 		}
-		while (!isReady(taskContext));
 	}
 	
 	public void downloadResult(TaskContext taskContext, IArtifactPublisher publisher) throws TaskException {
