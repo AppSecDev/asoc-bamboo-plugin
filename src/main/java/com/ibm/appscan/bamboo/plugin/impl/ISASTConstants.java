@@ -13,6 +13,7 @@ public interface ISASTConstants {
 	String CFG_SELECTED_UTIL	= "selectedUtil";		//$NON-NLS-1$
 	String CFG_SELECTED_CRED	= "selectedCred";		//$NON-NLS-1$
 	String CFG_APP_ID			= "appId";				//$NON-NLS-1$
+	String CFG_SUSPEND			= "suspendJob";			//$NON-NLS-1$
 	String CFG_MAX_HIGH			= "maxHigh";			//$NON-NLS-1$
 	String CFG_MAX_MEDIUM		= "maxMedium";			//$NON-NLS-1$
 	String CFG_MAX_LOW			= "maxLow";				//$NON-NLS-1$

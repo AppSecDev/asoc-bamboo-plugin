@@ -187,10 +187,13 @@ public class SASTScanTask implements TaskType, ISASTConstants, IArtifactPublishe
 		TaskResultBuilder result = TaskResultBuilder.newBuilder(taskContext);		
 		
 		try {
-			scanner.waitForReady(taskContext);
-			scanner.downloadResult(taskContext, this);
+			if (taskContext.getConfigurationMap().getAsBoolean(CFG_SUSPEND)) {
+				scanner.waitForReady(taskContext);
+				scanner.downloadResult(taskContext, this);
+				return calculateResult(taskContext, result).build();
+			}
 			
-			return calculateResult(taskContext, result).build();
+			return result.success().build();
 		}
 		catch (InterruptedException e) {
 			Thread.currentThread().interrupt();

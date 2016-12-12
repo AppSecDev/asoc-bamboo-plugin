@@ -68,6 +68,7 @@ public class SASTScanTaskConfigurator extends AbstractTaskConfigurator implement
 		context.put(CFG_SELECTED_UTIL, config.get(CFG_SELECTED_UTIL));
 		context.put(CFG_SELECTED_CRED, config.get(CFG_SELECTED_CRED));
 		context.put(CFG_APP_ID, config.get(CFG_APP_ID));
+		context.put(CFG_SUSPEND, Boolean.valueOf(config.get(CFG_SUSPEND)));
 		context.put(CFG_MAX_HIGH, config.get(CFG_MAX_HIGH));
 		context.put(CFG_MAX_MEDIUM, config.get(CFG_MAX_MEDIUM));
 		context.put(CFG_MAX_LOW, config.get(CFG_MAX_LOW));
@@ -101,6 +102,7 @@ public class SASTScanTaskConfigurator extends AbstractTaskConfigurator implement
 		config.put(CFG_SELECTED_UTIL, params.getString(CFG_SELECTED_UTIL));
 		config.put(CFG_SELECTED_CRED, params.getString(CFG_SELECTED_CRED));
 		config.put(CFG_APP_ID, params.getString(CFG_APP_ID));
+		config.put(CFG_SUSPEND, Boolean.toString(params.getBoolean(CFG_SUSPEND)));
 		config.put(CFG_MAX_HIGH, params.getString(CFG_MAX_HIGH));
 		config.put(CFG_MAX_MEDIUM, params.getString(CFG_MAX_MEDIUM));
 		config.put(CFG_MAX_LOW, params.getString(CFG_MAX_LOW));

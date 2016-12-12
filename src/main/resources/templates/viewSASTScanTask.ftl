@@ -6,6 +6,7 @@
 [@ui.bambooSection titleKey="section.asoc"]
 	[@ww.label labelKey="label.cred" name="selectedCred"/]
 	[@ww.label labelKey="label.appid" name="appId"/]
+	[@ww.checkbox labelKey="label.suspend" name="suspendJob" disabled="true"/]
 [/@ui.bambooSection]
 
 [@ui.bambooSection titleKey="section.fail"]
