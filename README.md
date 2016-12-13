@@ -21,7 +21,7 @@ Easily integrate [IBM Application Security on Cloud](https://appscan.ibmcloud.co
 
 2. Use the Bamboo administration dashboard to add the SA Client capability to your server (for local agents) or to your remote agents. Specify the path to the Static Analyzer Client Utility.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install2.png)
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install2.png)
 
 3. Enter your IBM Application Security on Cloud account user name and password in the Bamboo shared credentials page.
 
@@ -29,11 +29,11 @@ Easily integrate [IBM Application Security on Cloud](https://appscan.ibmcloud.co
 
 1. Add the SAST scan task to your build plan after your artifacts have been built. The SAST scan task will generate an intermediate representation of your artifacts and submit it to the cloud service for scanning.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task1.png)
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task1.png)
 
 2. Enter information for the SAST scan task:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task2.png)
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task2.png)
 
    - Select the client utility to use.
    
@@ -41,21 +41,23 @@ Easily integrate [IBM Application Security on Cloud](https://appscan.ibmcloud.co
    
    - Enter the ID of the application to associate with your scan.
    
-   - Optionally, specify the criteria by which a build failure occurs when security findings are found.
+   - Select whether the build job should wait for the scan to complete.
+   
+   - If you chose to wait for the scan to complete, then you can optionally specify the criteria by which a build failure occurs when security findings are found.
 
 # Scan Results after a Build
 
-1. The SAST scan task publishes two artifacts:
+1. The SAST scan task publishes the following artifacts:
 
    ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result1.png)
 
    - IRX - this is the intermediate representation of your artifacts that is uploaded to the cloud service for scanning.
    
-   - Scan Results - HTML report of the security findings that are found.
+   - Scan Results - HTML report of the security findings that are found (only if waiting for the scan to complete option is selected).
 
 2. Messages about the outcome of the scan will also be written to the build log:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result2.png)
+   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result2.png)
 
 # License
 
