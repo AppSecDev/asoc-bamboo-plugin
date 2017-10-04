@@ -141,7 +141,7 @@ public class SASTScanner implements ISASTConstants, IJSONConstants {
 				taskContext, 
 				createExternalProcessBuilder(
 						taskContext,
-						"scx_login",		//$NON-NLS-1$
+						"api_login",		//$NON-NLS-1$
 						"-u", username,		//$NON-NLS-1$
 						"-P", password, 	//$NON-NLS-1$
 						"-persist"));		//$NON-NLS-1$
