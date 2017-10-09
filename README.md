@@ -23,7 +23,7 @@ Easily integrate [IBM Application Security on Cloud](https://appscan.ibmcloud.co
 
    ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install2.png)
 
-3. Enter your IBM Application Security on Cloud account user name and password in the Bamboo shared credentials page.
+3. Enter your IBM Application Security on Cloud account [API Key ID and Secret Key] (https://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/appseccloud_generate_api_key_cm.html) in the Bamboo shared credentials page.
 
 # Adding the SAST Scan Task to your Build Plan
 
