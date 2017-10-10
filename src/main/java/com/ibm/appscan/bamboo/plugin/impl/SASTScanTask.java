@@ -21,7 +21,6 @@ import com.atlassian.bamboo.plan.artifact.ArtifactDefinitionContext;
 import com.atlassian.bamboo.plan.artifact.ArtifactDefinitionContextImpl;
 import com.atlassian.bamboo.plan.artifact.ArtifactPublishingResult;
 import com.atlassian.bamboo.process.ProcessService;
-import com.atlassian.bamboo.security.EncryptionService;
 import com.atlassian.bamboo.task.TaskContext;
 import com.atlassian.bamboo.task.TaskException;
 import com.atlassian.bamboo.task.TaskResult;
@@ -43,15 +42,13 @@ public class SASTScanTask implements TaskType, ISASTConstants, IArtifactPublishe
 	
 	private ArtifactManager artifactManager;
 	private CredentialsManager credentialsManager;
-	private EncryptionService encryptionService;
 	private CapabilityContext capabilityContext;
 	
 	public SASTScanTask(
 			@ComponentImport I18nBeanFactory i18nBeanFactory, 
 			@ComponentImport ProcessService processService, 
 			@ComponentImport ArtifactManager artifactManager, 
-			@ComponentImport CredentialsManager credentialsManager, 
-			@ComponentImport EncryptionService encryptionService, 
+			@ComponentImport CredentialsManager credentialsManager,  
 			@ComponentImport CapabilityContext capabilityContext) {
 		
 		logger = new LogHelper(i18nBeanFactory.getI18nBean());
@@ -59,7 +56,6 @@ public class SASTScanTask implements TaskType, ISASTConstants, IArtifactPublishe
 		
 		this.artifactManager = artifactManager;
 		this.credentialsManager = credentialsManager;
-		this.encryptionService = encryptionService;
 		this.capabilityContext = capabilityContext;
 	}
 	
@@ -90,7 +86,7 @@ public class SASTScanTask implements TaskType, ISASTConstants, IArtifactPublishe
 		String username = credentials.getConfiguration().get("username"); //$NON-NLS-1$
 		scanner.setUsername(username);
 		
-		String password = encryptionService.decrypt(credentials.getConfiguration().get("password")); //$NON-NLS-1$
+		String password = credentials.getConfiguration().get("password"); //$NON-NLS-1$
 		scanner.setPassword(password);
 		
 		// this ensures password is masked in build log
