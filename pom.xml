@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-(c) Copyright IBM Corporation 2016.
+(c) Copyright HCL Technologies Ltd. 2019.
 LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -8,16 +8,16 @@ LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.ibm.appscan</groupId>
-    <artifactId>com.ibm.appscan.bamboo.plugin</artifactId>
+    <groupId>com.hcl.appscan</groupId>
+    <artifactId>com.hcl.appscan.bamboo.plugin</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <organization>
-        <name>IBM</name>
-        <url>http://www.ibm.com</url>
+        <name>HCL</name>
+        <url>https://www.hcl.com/</url>
     </organization>
 
-    <description>This is the com.ibm.appscan:com.ibm.appscan.bamboo.plugin plugin for Atlassian Bamboo.</description>
+    <description>This is the com.hcl.appscan:com.hcl.appscan.bamboo.plugin plugin for Atlassian Bamboo.</description>
     <packaging>atlassian-plugin</packaging>
 
     <properties>
@@ -106,7 +106,7 @@ LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
 
                         <!-- Add package to export here -->
                         <!-- Export-Package>
-                            com.ibm.appscan.bamboo.plugin.api,
+                            com.hcl.appscan.bamboo.plugin.api,
                         </Export-Package -->
 
                         <!-- Add package import here -->
@@ -146,5 +146,5 @@ LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
             </plugin>
         </plugins>
     </build>
-    <name>IBM AppScan Plugin</name>
+    <name>HCL AppScan Plugin</name>
 </project>
