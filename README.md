@@ -1,10 +1,10 @@
-# IBM Application Security on Cloud Bamboo Plug-in
+# HCL AppScan on Cloud Bamboo Plug-in
 
-Easily integrate [IBM Application Security on Cloud](https://cloud.appscan.com) security scanning into your Atlassian Bamboo builds.
+Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com) security scanning into your Atlassian Bamboo builds.
 
 # Prerequisites
 
-- An account on the [IBM Application Security on Cloud](https://cloud.appscan.com) service. You'll also need to [create an application](http://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/ent_create_application.html) on the service and make note of its numeric ID in the browser URL. This ID will be required later when configuring the SAST scan task.
+- An account on the [HCL AppScan on Cloud](https://cloud.appscan.com) service. You'll also need to [create an application](http://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/ent_create_application.html) on the service and make note of its numeric ID in the browser URL. This ID will be required later when configuring the SAST scan task.
 - The plug-in has been tested to run on Bamboo server version 5.13.2 or later.
 - To build the plug-in, you will need to install the [Atlassian plug-in SDK](https://developer.atlassian.com/docs/getting-started).
 - You will need to set up the Static Analyzer Client Utility on your Bamboo server (to initiate scans on local agents) or on remote agent machines. For information about obtaining and using the client utility, see [its docs](http://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/src_scanning.html).
@@ -23,17 +23,17 @@ Easily integrate [IBM Application Security on Cloud](https://cloud.appscan.com) 
 
    ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install2.png)
 
-3. Enter your IBM Application Security on Cloud account [API Key ID and Secret Key] (https://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/appseccloud_generate_api_key_cm.html) in the Bamboo shared credentials page.
+3. Enter your HCL AppScan on Cloud account [API Key ID and Secret Key] (https://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/appseccloud_generate_api_key_cm.html) in the Bamboo shared credentials page.
 
 # Adding the SAST Scan Task to your Build Plan
 
 1. Add the SAST scan task to your build plan after your artifacts have been built. The SAST scan task will generate an intermediate representation of your artifacts and submit it to the cloud service for scanning.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task1.png)
+   ![](https://github.com/hclproducts/asoc-bamboo-plugin/blob/master/images/task1.png)
 
 2. Enter information for the SAST scan task:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task2.png)
+   ![](https://github.com/hclproducts/asoc-bamboo-plugin/blob/master/images/task2.png)
 
    - Select the client utility to use.
    
@@ -49,7 +49,7 @@ Easily integrate [IBM Application Security on Cloud](https://cloud.appscan.com) 
 
 1. The SAST scan task publishes the following artifacts:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result1.png)
+   ![](https://github.com/hclproducts/asoc-bamboo-plugin/blob/master/images/result1.png)
 
    - IRX - this is the intermediate representation of your artifacts that is uploaded to the cloud service for scanning.
    
@@ -57,7 +57,7 @@ Easily integrate [IBM Application Security on Cloud](https://cloud.appscan.com) 
 
 2. Messages about the outcome of the scan will also be written to the build log:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result2.png)
+   ![](https://github.com/hclproducts/asoc-bamboo-plugin/blob/master/images/result2.png)
 
 # License
 
