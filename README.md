@@ -29,11 +29,11 @@ Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com/) security sca
 
 1. Add the SAST scan task to your build plan after your artifacts have been built. The SAST scan task will generate an intermediate representation of your artifacts and submit it to the cloud service for scanning.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task1.png)
+   ![](https://github.com/hclproducts/asoc-bamboo-plugin/blob/master/images/task1.png)
 
 2. Enter information for the SAST scan task:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task2.png)
+   ![](https://github.com/hclproducts/asoc-bamboo-plugin/blob/master/images/task2.png)
 
    - Select the client utility to use.
    
@@ -49,7 +49,7 @@ Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com/) security sca
 
 1. The SAST scan task publishes the following artifacts:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result1.png)
+   ![](https://github.com/hclproducts/asoc-bamboo-plugin/blob/master/images/result1.png)
 
    - IRX - this is the intermediate representation of your artifacts that is uploaded to the cloud service for scanning.
    
@@ -57,7 +57,7 @@ Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com/) security sca
 
 2. Messages about the outcome of the scan will also be written to the build log:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result2.png)
+   ![](https://github.com/hclproducts/asoc-bamboo-plugin/blob/master/images/result2.png)
 
 # License
 
