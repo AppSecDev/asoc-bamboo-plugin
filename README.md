@@ -23,7 +23,7 @@ Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com/) security sca
 
    ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install2.png)
 
-3. Enter your HCL AppScan on Cloud account [API Key ID and Secret Key] (https://help.hcltechsw.com/appscan/ASoC/appseccloud_generate_api_key_cm.html) in the Bamboo shared credentials page.
+3. Enter your HCL AppScan on Cloud account [API Key ID and Secret Key](https://help.hcltechsw.com/appscan/ASoC/appseccloud_generate_api_key_cm.html) in the Bamboo shared credentials page.
 
 # Adding the SAST Scan Task to your Build Plan
 
