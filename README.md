@@ -17,11 +17,11 @@ Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com/) security sca
 
 1. Install the plug-in via the Bamboo administration dashboard. After installing the plug-in, it will appear in the list of user-installed add-ons.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install1.png)
+   ![](https://github.com/hclproducts/appscan-bamboo-plugin/blob/master/images/install1.png)
 
 2. Use the Bamboo administration dashboard to add the SA Client capability to your server (for local agents) or to your remote agents. Specify the path to the Static Analyzer Client Utility.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/install2.png)
+   ![](https://github.com/hclproducts/appscan-bamboo-plugin/blob/master/images/install2.png)
 
 3. Enter your HCL AppScan on Cloud account [API Key ID and Secret Key](https://help.hcltechsw.com/appscan/ASoC/appseccloud_generate_api_key_cm.html) in the Bamboo shared credentials page.
 
@@ -29,11 +29,11 @@ Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com/) security sca
 
 1. Add the SAST scan task to your build plan after your artifacts have been built. The SAST scan task will generate an intermediate representation of your artifacts and submit it to the cloud service for scanning.
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task1.png)
+   ![](https://github.com/hclproducts/appscan-bamboo-plugin/blob/master/images/task1.png)
 
 2. Enter information for the SAST scan task:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/task2.png)
+   ![](https://github.com/hclproducts/appscan-bamboo-plugin/blob/master/images/task2.png)
 
    - Select the client utility to use.
    
@@ -49,7 +49,7 @@ Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com/) security sca
 
 1. The SAST scan task publishes the following artifacts:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result1.png)
+   ![](https://github.com/hclproducts/appscan-bamboo-plugin/blob/master/images/result1.png)
 
    - IRX - this is the intermediate representation of your artifacts that is uploaded to the cloud service for scanning.
    
@@ -57,7 +57,7 @@ Easily integrate [HCL AppScan on Cloud](https://cloud.appscan.com/) security sca
 
 2. Messages about the outcome of the scan will also be written to the build log:
 
-   ![](https://github.com/AppSecDev/asoc-bamboo-plugin/blob/master/images/result2.png)
+   ![](https://github.com/hclproducts/appscan-bamboo-plugin/blob/master/images/result2.png)
 
 # License
 
