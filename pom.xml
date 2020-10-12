@@ -62,7 +62,7 @@ LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
 
